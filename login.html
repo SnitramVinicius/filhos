@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quem está assistindo? - Clone Netflix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen flex flex-col items-center justify-center px-4">
+
+  <h1 class="text-3xl md:text-5xl font-semibold mb-12 text-center">Quem está assistindo?</h1>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-1 w-full max-w-4xl">
+    <!-- Usuário 1 -->
+    <a href="zayan.html" class="flex flex-col items-center group cursor-pointer">
+      <img
+        src="img/Design sem nome (2).jpg"
+        alt="Zayan"
+        class="w-28 h-28 md:w-36 md:h-36 rounded-md border-2 border-transparent group-hover:border-white transition"
+      />
+      <span class="mt-2 text-sm md:text-base text-gray-400 group-hover:text-white">Zayan</span>
+    </a>
+
+    <!-- Usuário 2 -->
+    <a href="zarack.html" class="flex flex-col items-center group cursor-pointer">
+      <img
+        src="img/Design sem nome (21).png"
+        alt="Zarack"
+        class="w-28 h-28 md:w-36 md:h-36 rounded-md border-2 border-transparent group-hover:border-white transition"
+      />
+      <span class="mt-2 text-sm md:text-base text-gray-400 group-hover:text-white">Zarack</span>
+    </a>
+
+    <!-- Usuário 3 - Novo com vídeo -->
+    <div onclick="mostrarVideo()" class="flex flex-col items-center group cursor-pointer" id="novo-usuario">
+      <div id="avatar-novo">
+        <img
+          src="img/Netflix-avatar.png"
+          alt="Novo"
+          class="w-28 h-28 md:w-36 md:h-36 rounded-md border-2 border-transparent group-hover:border-white transition"
+        />
+        <span class="mt-2 text-sm md:text-base text-gray-400 group-hover:text-white">Novo</span>
+      </div>
+
+      <div id="video-novo" class="hidden flex flex-col items-center">
+        <video
+          id="videoPlayer"
+          playsinline
+          class="w-28 h-28 md:w-36 md:h-36 rounded-md border-2 border-transparent overflow-hidden"
+          src="video/Stork Animation.mp4"
+          type="video/mp4"
+        ></video>
+        <span class="mt-2 text-sm md:text-base text-gray-400">Novo</span>
+      </div>
+    </div>
+
+    <!-- Adicionar Perfil -->
+    <a class="flex flex-col items-center group cursor-pointer">
+      <div
+        class="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center bg-gray-700 rounded-md text-5xl text-white group-hover:border-white border-2 border-transparent transition"
+      >
+        +
+      </div>
+      <span class="mt-2 text-sm md:text-base text-gray-400 group-hover:text-white">Adicionar</span>
+    </a>
+  </div>
+
+  <button class="mt-16 px-6 py-2 border border-gray-500 hover:border-white text-gray-400 hover:text-white transition rounded">
+    Gerenciar Perfis
+  </button>
+
+  <script>
+    function mostrarVideo() {
+      document.getElementById("avatar-novo").style.display = "none";
+      const videoDiv = document.getElementById("video-novo");
+      videoDiv.classList.remove("hidden");
+
+      const video = document.getElementById("videoPlayer");
+      video.play();
+
+      video.onended = function() {
+        window.location.href = "novo.html";
+      };
+    }
+  </script>
+
+</body>
+</html>
