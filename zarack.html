@@ -5,16 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zarack - Catálogo</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .spinner {
+        border: 4px solid transparent;
+        border-top: 4px solid #e50914; /* vermelho Netflix */
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        animation: spin 1s linear infinite;
+      }
+      #preloader {
+        position: fixed;
+        inset: 0;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 50;
+      }
+    </style>
   </head>
   <body class="bg-black text-white min-h-screen">
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
+
     <!-- Navbar -->
     <div class="p-4 flex items-center justify-between bg-black border-b border-gray-800">
-          <div class="text-red-600 font-bold text-2xl">NETFLIX</div>
+      <div class="text-red-600 font-bold text-2xl">NETFLIX</div>
       <a href="login.html" class="text-gray-400 hover:text-white text-sm">Trocar Perfil</a>
     </div>
 
     <!-- Galeria estilo catálogo -->
-    <div class="p-6">
+    <div id="gallery" class="p-6 hidden">
       <h2 class="text-xl mb-4">Fotos do <strong>Zarack</strong></h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <img src="img/Zarack1.jpeg" class="rounded hover:scale-105 transition duration-300 shadow-lg" />
@@ -34,8 +63,16 @@
         <img src="img/Zarack15.jpg" class="rounded hover:scale-105 transition duration-300 shadow-lg" />
         <img src="img/Zarack16.jpg" class="rounded hover:scale-105 transition duration-300 shadow-lg" />
         <img src="img/Zarack17.jpg" class="rounded hover:scale-105 transition duration-300 shadow-lg" />
-
       </div>
     </div>
+
+    <script>
+      window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        const gallery = document.getElementById('gallery');
+        preloader.style.display = 'none';
+        gallery.classList.remove('hidden');
+      });
+    </script>
   </body>
 </html>
