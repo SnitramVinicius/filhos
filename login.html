@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quem está assistindo? - Clone Netflix</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes growVideo {
+      0% {
+        transform: scale(0.5);
+        opacity: 0.3;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .animate-grow-video {
+      animation: growVideo 0.8s ease-out forwards;
+    }
+  </style>
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col items-center justify-center px-4">
 
@@ -42,30 +58,32 @@
     </a>
 
     <!-- Usuário 4 - Novo com vídeo -->
-    <div onclick="mostrarVideo()" class="flex flex-col items-center group cursor-pointer" id="novo-usuario">
-      <!-- Avatar (imagem estática) -->
-      <div id="avatar-novo">
-        <img
-          src="img/Netflix-avatar.png"
-          alt="Novo"
-          class="w-28 h-28 md:w-36 md:h-36 rounded-md border-2 border-transparent group-hover:border-white transition"
-        />
-      </div>
+<!-- Usuário 4 - Novo com vídeo -->
+<div onclick="mostrarVideo()" class="flex flex-col items-center group cursor-pointer relative" id="novo-usuario">
+  <!-- Avatar (imagem estática) -->
+  <div id="avatar-novo">
+    <img
+      src="img/Netflix-avatar.png"
+      alt="Novo"
+      class="w-28 h-28 md:w-36 md:h-36 rounded-md border-2 border-transparent group-hover:border-white transition"
+    />
+  </div>
 
-      <!-- Vídeo (inicialmente escondido) -->
-      <div id="video-novo" class="hidden">
-        <video
-          id="videoPlayer"
-          playsinline
-          class="w-28 h-28 md:w-36 md:h-36 rounded-md border-2 border-transparent overflow-hidden"
-          src="video/Stork Animation.mp4"
-          type="video/mp4"
-        ></video>
-      </div>
+  <!-- Vídeo (inicialmente escondido) -->
+  <div id="video-novo" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+    <video
+      id="videoPlayer"
+      playsinline
+      class="rounded-md border-2 border-white w-[90vw] md:w-[50vw] h-auto animate-grow-video"
+      src="video/Stork Animation.mp4"
+      type="video/mp4"
+    ></video>
+  </div>
 
-      <!-- Texto fixo abaixo (sempre visível e centralizado) -->
-      <span class="mt-2 text-sm md:text-base text-gray-400 group-hover:text-white">2025</span>
-    </div>
+  <!-- Texto abaixo -->
+  <span class="mt-2 text-sm md:text-base text-gray-400 group-hover:text-white">2025</span>
+</div>
+
 
     <!-- Adicionar Perfil -->
     <a class="flex flex-col items-center group cursor-pointer">
@@ -84,11 +102,13 @@
 
   <script>
     function mostrarVideo() {
+      // Oculta só o avatar do usuário 2025
       document.getElementById("avatar-novo").style.display = "none";
-      const videoDiv = document.getElementById("video-novo");
-      videoDiv.classList.remove("hidden");
 
+      const videoDiv = document.getElementById("video-novo");
       const video = document.getElementById("videoPlayer");
+
+      videoDiv.classList.remove("hidden");
       video.play();
 
       video.onended = function () {
