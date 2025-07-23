@@ -26,17 +26,35 @@
       </div>
 
       <!-- Lado direito: vídeo -->
-      <div class="w-full max-w-md rounded overflow-hidden shadow-lg">
-<video
-  autoplay
-  muted
-  playsinline
-  controls
-  style="width: 600px; height: 450px; object-fit: cover; border-radius: 0.5rem; transform: rotate(270deg);"
->
-  <source src="video/Design sem nome.mp4" type="video/mp4" />
-  Seu navegador não suporta o vídeo.
-</video>
+<div class="w-full max-w-md rounded overflow-hidden shadow-lg">
+  <video
+    id="meuVideo"
+    autoplay
+    muted
+    playsinline
+    style="width: 600px; height: 450px; object-fit: cover; border-radius: 0.5rem;"
+  >
+    <source src="video/Vídeo do WhatsApp de 2025-07-10 à(s) 16.03.24_a4f4b28e.mp4" type="video/mp4" />
+    Seu navegador não suporta o vídeo.
+  </video>
+</div>
+
+<script>
+  const video = document.getElementById("meuVideo");
+
+  // Quando o vídeo estiver rodando, checar o tempo
+  video.addEventListener('timeupdate', () => {
+    if (video.currentTime >= 40) {
+      video.pause();            // Pausa o vídeo
+      video.currentTime = 0;    // Volta para o início
+
+      // Espera um pouco e inicia de novo (para evitar bugs em alguns navegadores)
+      setTimeout(() => {
+        video.play();
+      }, 100);
+    }
+  });
+</script>
       </div>
     </main>
   </body>
